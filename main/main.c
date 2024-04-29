@@ -6,7 +6,6 @@
 #include "./../hdr/dijkstra.h"
 #include "./../hdr/closeness.h"
 
-
 int main()
 {
     int escolha;
@@ -14,7 +13,7 @@ int main()
     system("clear");
     do
     {
-        
+
         printf("Escolha uma opção:\n");
         printf("0 - Sair\n");
         printf("1 - Ler grafo\n");
@@ -36,7 +35,7 @@ int main()
             char caminho[15] = "./exe/grafos/";
             printf("Digite o nome do arquivo: ");
             scanf("%s", nomeArquivo);
-            char* arquivo = strcat(caminho, nomeArquivo);
+            char *arquivo = strcat(caminho, nomeArquivo);
             printf("Lendo arquivo %s...\n", arquivo);
             FILE *file = fopen(arquivo, "r");
             while (!file)

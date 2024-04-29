@@ -40,7 +40,7 @@ int extrairMinimo(int tam, int *q, int *d)
 {
     int menor = 999999;
     int posMenor = -1;
-    
+
     for (int i = 0; i < tam; i++)
     {
         if (d[i] < menor && q[i] == 1)
@@ -48,20 +48,19 @@ int extrairMinimo(int tam, int *q, int *d)
             menor = d[i];
             posMenor = i;
         }
-        
     }
     q[posMenor] = 0;
     return posMenor;
 }
 
-int* dijkstra(Grafo *grafo, int vInicial)
+int *dijkstra(Grafo *grafo, int vInicial)
 {
     int *d = (int *)malloc(grafo->tamanho * sizeof(int));
     int *pi = (int *)malloc(grafo->tamanho * sizeof(int));
     int *s = (int *)malloc(grafo->tamanho * sizeof(int));
     int *q = (int *)malloc(grafo->tamanho * sizeof(int));
 
-    int u, v, w;
+    int u, v;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -75,19 +74,16 @@ int* dijkstra(Grafo *grafo, int vInicial)
 
     while (!vazio(q, grafo->tamanho)) // Enquanto |Q| != 0
     {
-        u = extrairMinimo(grafo->tamanho,q,d);  // u <- extrair Minimo(Q)
-        s[u] = 1;   // S <- S U {u}
-        
-
+        u = extrairMinimo(grafo->tamanho, q, d); // u <- extrair Minimo(Q)
+        s[u] = 1;                                // S <- S U {u}
 
         int nAdj = numeroAdjacentes(grafo, u);
         int *adj = adjacentes(grafo, u);
-        for (int i = 0; i < nAdj; i++)  // para cada v pertencente à Adj[u]
+        for (int i = 0; i < nAdj; i++) // para cada v pertencente à Adj[u]
         {
             v = adj[i];
-            relaxa(u,v,grafo->matriz[u][v],d,pi);   // relaxa(u,v,w)
+            relaxa(u, v, grafo->matriz[u][v], d, pi); // relaxa(u,v,w)
         }
-        
     }
 
     free(pi);

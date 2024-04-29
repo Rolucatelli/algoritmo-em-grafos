@@ -7,8 +7,8 @@
 float closeness(Grafo *grafo, int vertice)
 {
     float soma = 0;
-    int* d = dijkstra(grafo, vertice);
-    for (int i = 0; i < grafo->tamanho-1; i++)
+    int *d = dijkstra(grafo, vertice);
+    for (int i = 0; i < grafo->tamanho - 1; i++)
     {
         soma += (float)d[i];
     }
