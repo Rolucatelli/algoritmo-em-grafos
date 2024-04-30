@@ -6,17 +6,36 @@
 #include "./../hdr/dijkstra.h"
 #include "./../hdr/closeness.h"
 
+
 int main()
 {
+    system("clear");
     int escolha;
     Grafo *grafo = NULL;
+    char nomeArquivo[100];
+    char caminho[18] = "./exe/grafos/";
+    printf("Digite o nome do arquivo: ");
+    scanf("%s", nomeArquivo);
+    strcat(caminho, nomeArquivo);
+    FILE *file = fopen(caminho, "r");
+    strcpy(caminho, "./exe/grafos/");
+
+    while (!file)
+    {
+        printf("Arquivo não encontrado. Digite o nome do arquivo novamente (com a extensão do tipo): ");
+        scanf("%s", nomeArquivo);
+        strcat(caminho, nomeArquivo);
+        file = fopen(caminho, "r");
+        strcpy(caminho, "./exe/grafos/");
+    }
+    grafo = lerGrafo(file);
     system("clear");
     do
     {
 
         printf("Escolha uma opção:\n");
         printf("0 - Sair\n");
-        printf("1 - Ler grafo\n");
+        printf("1 - Ler outro grafo\n");
         printf("2 - Calcular closeness\n");
         printf("3 - Calcular caminho mínimo\n");
         printf("4 - Imprimir grafo\n");
@@ -28,25 +47,23 @@ int main()
         case 0:
             printf("Saindo...\n");
             break;
-
         case 1:
             system("clear");
-            char nomeArquivo[100];
-            char caminho[15] = "./exe/grafos/";
             printf("Digite o nome do arquivo: ");
             scanf("%s", nomeArquivo);
-            char *arquivo = strcat(caminho, nomeArquivo);
-            printf("Lendo arquivo %s...\n", arquivo);
-            FILE *file = fopen(arquivo, "r");
+            strcat(caminho, nomeArquivo);
+            FILE *file = fopen(caminho, "r");
+            strcpy(caminho, "./exe/grafos/");
             while (!file)
             {
                 printf("Arquivo não encontrado. Digite o nome do arquivo novamente (com a extensão do tipo): ");
-                scanf("%s", arquivo);
-                file = fopen(arquivo, "r");
+                scanf("%s", nomeArquivo);
+                strcat(caminho, nomeArquivo);
+                file = fopen(caminho, "r");
+                strcpy(caminho, "./exe/grafos/");
             }
             grafo = lerGrafo(file);
             break;
-
         case 2:
             system("clear");
             int verticeCloseness = 0;
@@ -68,7 +85,6 @@ int main()
                 printf("Distância de %d para %d: %d\n", vertice, i, d[i]);
             }
             break;
-
         case 4:
             system("clear");
             printGrafo(grafo);
@@ -76,11 +92,17 @@ int main()
             break;
         case 5:
             system("clear");
+            char path[20] = "./exe/output/";
+            char *temp = strcat(path, nomeArquivo);
+            printf("Salvando closeness em %s\n", temp);
+            FILE *output = fopen(temp, "w");
+            strcpy(path, "./exe/output/");
             for (int i = 0; i < grafo->tamanho; i++)
             {
                 float c = closeness(grafo, i);
-                printf("Closeness do vértice %d: %f\n", i, c);
+                fprintf(output, "%f\n", c);
             }
+            fclose(output);
             break;
         default:
             printf("Opção inválida\n");

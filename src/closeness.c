@@ -12,6 +12,6 @@ float closeness(Grafo *grafo, int vertice)
     {
         soma += (float)d[i];
     }
-    soma = soma / (grafo->tamanho - 1);
+    soma = soma / ((grafo->tamanho) - 1);
     return soma;
 }
