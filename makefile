@@ -27,10 +27,10 @@ RM = rm -rf
 #########################
 # Compilação e linkagem #
 #########################
-all: objFolder exeFolder $(PROJ_NAME)
+all: objFolder exeFolder $(PROJ_NAME) input
 debug: objFolder exeFolder $(DEBUG_NAME)
 
-run: all
+run: all input
 	@ ./exe/${PROJ_NAME}
 
 $(DEBUG_NAME): $(OBJ)
@@ -59,13 +59,15 @@ objFolder:
 	@ mkdir -p objects ./objects/algoritmos ./objects/estruturas
 
 exeFolder:
-	@ mkdir -p exe ./exe/grafos
+	@ mkdir -p exe ./exe/grafos ./exe/output
+
+input:
+	@ python3 py/create_graphs.py
+	@ echo 'Criando os arquivos de entrada $<'
 
 clean:
 	@ $(RM) ./objects/* ./exe/* *~
-	@ rmdir objects exe
-
-what: echo
+	@ rmdir objects
 echo:
 	@ echo 'Compilando e linkando o projeto: $(PROJ_NAME)'
 	@ echo 'Arquivos .c: $(C_SOURCE)'
