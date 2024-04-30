@@ -87,7 +87,7 @@ int main()
             break;
         case 4:
             system("clear");
-            printGrafo(grafo);
+            system("python3 py/draw_graphs.py");
             printf("\n");
             break;
         case 5:
