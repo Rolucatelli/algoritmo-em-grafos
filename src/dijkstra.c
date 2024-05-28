@@ -59,10 +59,8 @@ int *dijkstra(Grafo *grafo, int vInicial)
     int *pi = (int *)malloc(grafo->tamanho * sizeof(int));
     int *s = (int *)malloc(grafo->tamanho * sizeof(int));
     int *q = (int *)malloc(grafo->tamanho * sizeof(int));
-
+    
     int u, v;
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     inicializa(grafo, vInicial, d, pi);
 

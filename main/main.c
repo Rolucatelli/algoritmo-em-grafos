@@ -87,7 +87,12 @@ int main()
             break;
         case 4:
             system("clear");
-            system("python3 py/draw_graphs.py");
+            char nomeGrafo[100];
+            printf("Digite o nome do arquivo (.txt): ");
+            scanf("%s", nomeArquivo);
+            char comando[100] = "python3 py/draw_graphs.py ";
+            strcat(comando, nomeArquivo);
+            system(comando);
             printf("\n");
             break;
         case 5:
